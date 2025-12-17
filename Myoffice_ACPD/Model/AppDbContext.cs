@@ -12,7 +12,7 @@ namespace Myoffice_ACPD.Model
         public DbSet<Myoffice_ACPD.Model.MyOffice_ACPD> MyOffice_ACPD { get; set; } = default!;
 
 
-
+        //不使用EF 操作 改用sp +json
         //public DbSet<MyOffice_ACPD> MyOffice_ACPDs { get; set; }
         //public DbSet<MyOffice_ExcuteionLog> MyOffice_ExcuteionLogs { get; set; }
 

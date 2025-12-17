@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Myoffice_ACPD.Migrations;
 using Myoffice_ACPD.Model;
+using Myoffice_ACPD.Model.Dto;
 
 namespace Myoffice_ACPD.Controllers
 {
@@ -19,6 +22,31 @@ namespace Myoffice_ACPD.Controllers
         {
             _context = context;
         }
+
+
+        public async Task <IActionResult> CreateAcpd([FromBody] MyOffice_ACPD_CreateDto dto)
+        {
+            //傳入的 dto 物件 轉成 json 字串
+            var json  = JsonSerializer.Serialize(dto);
+            //使用 ADO.NET 直接呼叫 存儲過程
+            var conn = _context.Database.GetDbConnection();
+            await conn.OpenAsync();
+
+            //建立命令物件
+            using var command = conn.CreateCommand();
+
+
+
+
+
+            return Ok();
+        }
+
+
+
+
+        #region CRUD original template
+
 
         // GET: api/MyOffice_ACPD
         [HttpGet]
@@ -117,5 +145,13 @@ namespace Myoffice_ACPD.Controllers
         {
             return _context.MyOffice_ACPD.Any(e => e.ACPD_SID == id);
         }
+
+        #endregion
+
+
+
+
+
+
     }
 }
